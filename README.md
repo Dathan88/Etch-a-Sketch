@@ -1,0 +1,1 @@
+I am going to try and create an Etch-a-Sketch program using the DOM.
