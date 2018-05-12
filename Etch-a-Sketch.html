@@ -7,37 +7,35 @@
 
 <body>
 
-<div class="container">
+<button id="btn">Start</button>
+
+<div id="container">
 </div>
 
 
 <script type="text/javascript">
 
-function createDiv (input) {
-	prompt('How many squares?');
-	let i;
-	for (i = 0; i > input; i++) {
-		document.createElement('div');
-		container.appendChild(i);
-	}
-}
+let btn = document.querySelector('#btn');
+document.querySelector('#btn').onclick = createDiv;
 
-const container = document.querySelector('.container');
+const container = document.querySelector('#container');
 container.style.display = 'grid';
 container.style.backgroundColor = 'blue';
 container.style.gridTemplateColumns = 'auto auto auto auto auto auto';
+container.style.gridGap = '10px 10px';
 
-const item1 = document.createElement('div');
-item1.classList.add('item1');
-container.appendChild(item1);
-item1.textContent = '1';
-item1.style.textAlign = 'center';
+function createDiv() {
+	let input = prompt("How many squares?");
 
+for (i = 0; i < input; i++) {
+	let box = document.createElement('div');
+	box.className = "squares";
+	box.textContent = i;
+	box.style.textAlign = 'center';
 
-
-
-
-
+	document.getElementById('container').appendChild(box);
+	}
+}
 
 
 </script>
