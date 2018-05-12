@@ -13,12 +13,34 @@
 
 <script type="text/javascript">
 
+function createDiv (input) {
+	prompt('How many squares?');
+	let i;
+	for (i = 0; i > input; i++) {
+		document.createElement('div');
+		container.appendChild(i);
+	}
+}
+
 const container = document.querySelector('.container');
-container.style.display = 'grid: 100px 100px / 3fr 1fr';
+container.style.display = 'grid';
 container.style.backgroundColor = 'blue';
+container.style.gridTemplateColumns = 'auto auto auto auto auto auto';
+
+const item1 = document.createElement('div');
+item1.classList.add('item1');
+container.appendChild(item1);
+item1.textContent = '1';
+item1.style.textAlign = 'center';
+
+
+
+
+
+
+
 
 </script>
-
 
 
 </body>
