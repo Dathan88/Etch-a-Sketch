@@ -20,7 +20,6 @@ document.querySelector('#btn').onclick = createDiv;
 
 const container = document.querySelector('#container');
 container.style.display = 'grid';
-container.style.backgroundColor = 'blue';
 container.style.gridTemplateColumns = 'auto auto auto auto auto auto';
 container.style.gridGap = '10px 10px';
 
@@ -29,17 +28,20 @@ function createDiv() {
 
 for (i = 0; i < input; i++) {
 	let box = document.createElement('div');
-	box.className = "squares";
+	box.className = 'squares';
 	box.textContent = i;
 	box.style.textAlign = 'center';
-
+	box.mouseover = function(e) {
+		document.getElementsByClassName('squares').style.color = 'red';
+	}
+	
 	document.getElementById('container').appendChild(box);
 	}
 }
 
 
+
+
 </script>
-
-
 </body>
 </html>
