@@ -18,29 +18,30 @@
 let btn = document.querySelector('#btn');
 document.querySelector('#btn').onclick = createDiv;
 
-const container = document.querySelector('#container');
-container.style.display = 'grid';
-container.style.gridTemplateColumns = 'auto auto auto auto auto auto';
-container.style.gridGap = '10px 10px';
+let container = document.querySelector('#container').style;
+container.display = 'grid';
+container.gridTemplateColumns = 'repeat(16, 1fr [col-start])';
+container.gridTemplateRows = 'repeat(16, 1fr [row-start])';
+container.gridGap = '1px 1px';
+
 
 function createDiv() {
 	let input = prompt("How many squares?");
 
 for (i = 0; i < input; i++) {
 	let box = document.createElement('div');
-	box.className = 'squares';
+	box.classList.add('squares');
 	box.textContent = i;
 	box.style.textAlign = 'center';
-	box.mouseover = function(e) {
-		document.getElementsByClassName('squares').style.color = 'red';
-	}
+	box.style.justifyContent = 'spaceEvenly';
+	box.style.border = '1px solid black';
+	box.addEventListener('mouseover', (e) => {
+		e.target.style.background = 'black';
+	});
 	
 	document.getElementById('container').appendChild(box);
 	}
 }
-
-
-
 
 </script>
 </body>
