@@ -17,14 +17,23 @@
 
 let btn = document.getElementById('btn');
 btn.addEventListener('click', createDiv);
-btn.addEventListener('click', reload);
 
-let container = document.querySelector('#container').style;
-container.display = 'grid';
-container.gridTemplateColumns = 'repeat(16, 30px [col-start])';
-container.gridTemplateRows = 'repeat(16, 30px [row-start])';
-container.gridGap = '1px 1px';
+let container = document.querySelector('#container');
+container.style.display = 'grid';
+container.style.gridTemplateColumns = 'repeat(16, 30px [col-start])';
+container.style.gridTemplateRows = 'repeat(16, 30px [row-start])';
+container.style.gridGap = '1px 1px';
+container.style.border = '1px solid black';
 
+for (i = 0; i < 256; i++) {
+	let standard = document.createElement('div');
+	standard.classList.add('default');
+	standard.addEventListener('mouseover', (e) => {
+		e.target.style.background = 'black';
+	});
+
+	document.getElementById('container').appendChild(standard);
+};
 
 function createDiv() {
 	let input = prompt("How many squares?");
@@ -41,10 +50,6 @@ for (i = 0; i < input; i++) {
 	
 	document.getElementById('container').appendChild(box);
 	}
-}
-
-function reload() {
-	window.location.reload(btn)
 }
 
 </script>
