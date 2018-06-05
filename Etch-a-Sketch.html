@@ -5,9 +5,9 @@
 	<title>Etch-a-Sketch</title>
 </head>
 
-<body>
+<body id="body">
 
-<button id="btn">Start</button>
+<button id="btn">Custom</button>
 
 <div id="container">
 </div>
@@ -23,17 +23,6 @@ container.style.display = 'grid';
 container.style.gridTemplateColumns = 'repeat(16, 30px [col-start])';
 container.style.gridTemplateRows = 'repeat(16, 30px [row-start])';
 container.style.gridGap = '1px 1px';
-container.style.border = '1px solid black';
-
-for (i = 0; i < 256; i++) {
-	let standard = document.createElement('div');
-	standard.classList.add('default');
-	standard.addEventListener('mouseover', (e) => {
-		e.target.style.background = 'black';
-	});
-
-	document.getElementById('container').appendChild(standard);
-};
 
 function createDiv() {
 	let input = prompt("How many squares?");
@@ -42,7 +31,6 @@ for (i = 0; i < input; i++) {
 	let box = document.createElement('div');
 	box.classList.add('squares');
 	box.style.textAlign = 'center';
-	box.style.justifyContent = 'spaceEvenly';
 	box.style.border = '1px solid black';
 	box.addEventListener('mouseover', (e) => {
 		e.target.style.background = 'black';
@@ -51,6 +39,21 @@ for (i = 0; i < input; i++) {
 	document.getElementById('container').appendChild(box);
 	}
 }
+
+function board() {
+for (i = 0; i < 256; i++) {
+	let standard = document.createElement('div');
+	standard.classList.add('default');
+	standard.addEventListener('mouseover', (e) => {
+		e.target.style.background = 'black';
+	});
+
+	document.getElementById('container').appendChild(standard);
+	};
+}
+
+document.addEventListener('DOMContentLoaded', board);
+
 
 </script>
 </body>
