@@ -7,10 +7,9 @@
 
 <body id="body">
 
-<button id="btn">Custom</button>
+<button id="btn">Custom Grid</button>
 
-<div id="container">
-</div>
+<div id="container"></div>
 
 
 <script type="text/javascript">
@@ -19,18 +18,21 @@ let btn = document.getElementById('btn');
 btn.addEventListener('click', createDiv);
 
 let container = document.querySelector('#container');
+//----------------------------------------------
+function createDiv() {
+	document.getElementById('container').innerHTML = '';
+
+	const container = document.querySelector('#container');
 container.style.display = 'grid';
 container.style.gridTemplateColumns = 'repeat(16, 30px [col-start])';
 container.style.gridTemplateRows = 'repeat(16, 30px [row-start])';
 container.style.gridGap = '1px 1px';
 
-function createDiv() {
 	let input = prompt("How many squares?");
 
-for (i = 0; i < input; i++) {
+for (i = 0; i < input * input; i++) {
 	let box = document.createElement('div');
 	box.classList.add('squares');
-	box.style.textAlign = 'center';
 	box.style.border = '1px solid black';
 	box.addEventListener('mouseover', (e) => {
 		e.target.style.background = 'black';
@@ -39,8 +41,14 @@ for (i = 0; i < input; i++) {
 	document.getElementById('container').appendChild(box);
 	}
 }
-
+//------------------------------------------------------
 function board() {
+	const container = document.querySelector('#container');
+container.style.display = 'grid';
+container.style.gridTemplateColumns = 'repeat(16, 30px [col-start])';
+container.style.gridTemplateRows = 'repeat(16, 30px [row-start])';
+container.style.gridGap = '1px 1px';
+
 for (i = 0; i < 256; i++) {
 	let standard = document.createElement('div');
 	standard.classList.add('default');
@@ -53,7 +61,6 @@ for (i = 0; i < 256; i++) {
 }
 
 document.addEventListener('DOMContentLoaded', board);
-
 
 </script>
 </body>
