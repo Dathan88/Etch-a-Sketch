@@ -19,31 +19,8 @@ btn.addEventListener('click', createDiv);
 
 let container = document.querySelector('#container');
 //----------------------------------------------
-function createDiv() {
-	document.getElementById('container').innerHTML = '';
-
-	const container = document.querySelector('#container');
-container.style.display = 'grid';
-container.style.gridTemplateColumns = 'repeat(16, 30px [col-start])';
-container.style.gridTemplateRows = 'repeat(16, 30px [row-start])';
-container.style.gridGap = '1px 1px';
-
-	let input = prompt("How many squares?");
-
-for (i = 0; i < input * input; i++) {
-	let box = document.createElement('div');
-	box.classList.add('squares');
-	box.style.border = '1px solid black';
-	box.addEventListener('mouseover', (e) => {
-		e.target.style.background = 'black';
-	});
-	
-	document.getElementById('container').appendChild(box);
-	}
-}
-//------------------------------------------------------
 function board() {
-	const container = document.querySelector('#container');
+	let container = document.querySelector('#container');
 container.style.display = 'grid';
 container.style.gridTemplateColumns = 'repeat(16, 30px [col-start])';
 container.style.gridTemplateRows = 'repeat(16, 30px [row-start])';
@@ -58,6 +35,40 @@ for (i = 0; i < 256; i++) {
 
 	document.getElementById('container').appendChild(standard);
 	};
+}
+//------------------------------------------------------
+function createDiv() {
+	document.getElementById('container').innerHTML = '';
+
+	const container = document.querySelector('#container');
+container.style.display = 'grid';
+container.style.gridTemplateColumns = 'repeat(16, 30px [col-start])';
+container.style.gridTemplateRows = 'repeat(16, 30px [col-start])';
+container.style.gridGap = '1px 1px';
+
+
+	let input = prompt("How many squares per side?");
+
+for (i = 0; i < input * input; i++) {
+	let box = document.createElement('div');
+	box.classList.add('squares');
+	box.style.border = '1px solid black';
+	box.addEventListener('mouseover', (e) => {
+		e.target.style.background = randomColor();
+	});
+	
+	document.getElementById('container').appendChild(box);
+	}
+}
+//----------------------------------------------------------
+
+function randomColor() {
+	let letters = '0123456789ABCDEF';
+	let color = '#';
+	for (i = 0; i < 6; i++) {
+		color += letters[Math.floor(Math.random() * 16)];
+	}
+	return color;
 }
 
 document.addEventListener('DOMContentLoaded', board);
