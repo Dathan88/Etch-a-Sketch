@@ -1,67 +1,62 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 	<title>Etch-a-Sketch</title>
 </head>
 
 <body id="body">
 
-<button id="btn">Custom Grid</button>
 
-<div id="container"></div>
+	<button id="btn">Custom Grid</button>
+	<div id="container"></div>
 
 
 <script type="text/javascript">
 
-let btn = document.getElementById('btn');
-btn.addEventListener('click', createDiv);
-
-let container = document.querySelector('#container');
-//----------------------------------------------
-function board() {
+	let btn = document.getElementById('btn');
+		btn.addEventListener('click', createDiv);
 	let container = document.querySelector('#container');
-container.style.display = 'grid';
-container.style.gridTemplateColumns = 'repeat(16, 30px [col-start])';
-container.style.gridTemplateRows = 'repeat(16, 30px [row-start])';
-container.style.gridGap = '1px 1px';
+
+	//------------board function called on DOMContentLoaded at end of script
+	function board() {
+		container.style.display = 'grid';
+		container.style.border = "1px solid black";
+		container.style.width = "31em";
+		container.style.margin = "auto";
+		container.style.gridTemplateColumns = 'repeat(16, 1.875em [col-start])';
+		container.style.gridTemplateRows = 'repeat(16, 1.875em [row-start])';
+		container.style.gridGap = '1px 1px';
 
 for (i = 0; i < 256; i++) {
 	let standard = document.createElement('div');
-	standard.classList.add('default');
-	standard.addEventListener('mouseover', (e) => {
-		e.target.style.background = 'black';
-	});
-
+		standard.classList.add('default');
+		standard.addEventListener('mouseover', (e) => {
+			e.target.style.background = 'black';
+		});
 	document.getElementById('container').appendChild(standard);
 	};
 }
-//------------------------------------------------------
+//------------------------called when button is pressed. Creates custom board
 function createDiv() {
 	document.getElementById('container').innerHTML = '';
-
-	const container = document.querySelector('#container');
-container.style.display = 'grid';
-container.style.gridTemplateColumns = 'repeat(16, 30px [col-start])';
-container.style.gridTemplateRows = 'repeat(16, 30px [col-start])';
-container.style.gridGap = '1px 1px';
-
-
+		container.style.display = 'grid';
+		container.style.gridTemplateColumns = 'repeat(16, 30px [col-start])';
+		container.style.gridTemplateRows = 'repeat(16, 30px [col-start])';
+		container.style.gridGap = '1px 1px';
 	let input = prompt("How many squares per side?");
 
-for (i = 0; i < input * input; i++) {
-	let box = document.createElement('div');
-	box.classList.add('squares');
-	box.style.border = '1px solid black';
-	box.addEventListener('mouseover', (e) => {
-		e.target.style.background = randomColor();
-	});
+	for (i = 0; i < input * input; i++) {
+		let box = document.createElement('div');
+			box.classList.add('squares');
+			box.style.border = '1px solid black';
+			box.addEventListener('mouseover', (e) => {
+				e.target.style.background = randomColor();
+			});
 	
-	document.getElementById('container').appendChild(box);
+		document.getElementById('container').appendChild(box);
 	}
 }
-//----------------------------------------------------------
-
+//----------------------called with createDiv/ makes the change color on each pass over
 function randomColor() {
 	let letters = '0123456789ABCDEF';
 	let color = '#';
@@ -72,7 +67,6 @@ function randomColor() {
 }
 
 document.addEventListener('DOMContentLoaded', board);
-
 </script>
 </body>
 </html>
