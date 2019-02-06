@@ -31,7 +31,7 @@
 		function createStyles() {
 			inputArea.setAttribute('id', 'inputArea')
 			inputArea.style.display = 'flex';
-			inputArea.style.margin = ' .6rem auto';
+			inputArea.style.margin = 'auto';
 			inputArea.style.width = '18.8rem';
 			inputArea.style.height = '1.5em';
 			//button to create custom board
@@ -39,6 +39,7 @@
 			btn.innerHTML = 'Custom Colored Grid';
 			btn.style.position = 'relative';
 			btn.style.width = '10rem';
+			btn.style.boxShadow = '.5rem .3rem .5rem darkgrey';
 			btn.style.left = 'calc(50% - 5rem)';
 			btn.addEventListener('click', () => {
 				btn.style.display = 'none';
@@ -53,11 +54,10 @@
 			customInput.setAttribute('required', 'true');
 			customInput.setAttribute('min', '1');
 			customInput.setAttribute('max', '50');
-			// customInput.style.position = 'absolute';
 			customInput.style.width = '9.7rem';
 			customInput.style.margin = 'auto .5rem';
-			// customInput.style.left = 'calc(50% - 5rem)';
 			customInput.style.display = 'none';
+			customInput.style.boxShadow = '.5rem .5rem 1rem darkgrey';
 			customInput.addEventListener('keyup', (e) => {
 				e.preventDefault();
 				if (e.keyCode === 13) {
@@ -68,18 +68,15 @@
 				}
 			})
 			//label left of input
-			// customLabel.style.position = 'absolute';
 			customLabel.style.margin = 'auto 0';
-			// customLabel.style.left = 'calc(50% - 9rem)';
-			// customLabel.style.top = '1.15rem';
 			customLabel.innerHTML = 'MAX: 50'
 			customLabel.style.display = 'none';
+			customLabel.style.textShadow = '.8rem .8rem .3rem grey';
 			//button to right of input - submits value to customBoard() on click
 			customBtn.setAttribute('type', 'submit');
-			// customBtn.style.position = 'absolute';
 			customBtn.style.margin = 'auto 0';
-			// customBtn.style.left = 'calc(60% - 5rem)';
 			customBtn.style.display = 'none';
+			customBtn.style.boxShadow = '.5rem .5rem 1rem darkgrey';
 			customBtn.addEventListener('click', (e) => {
 				e.preventDefault();
 				if (checkValid()) {
@@ -90,11 +87,11 @@
 			//Etch-a-Sketch area
 			sketchArea.style.display = 'grid';
 			sketchArea.style.position = 'relative';
-			// sketchArea.style.top = '3rem';
 			sketchArea.style.border = '1px solid black';
 			sketchArea.style.width = '37rem';
 			sketchArea.style.height = '37rem';
-			sketchArea.style.margin = 'auto';
+			sketchArea.style.boxShadow = '.5rem .5rem 1rem darkgrey';
+			sketchArea.style.margin = '2rem auto';
 			sketchArea.style.gridTemplateColumns = `repeat(16, ${100/16}% )`;
 			sketchArea.style.gridTemplateRows = `repeat(16, ${100/16}% )`;
 			//Append elements to inputArea
@@ -112,6 +109,7 @@
 				const square = document.createElement('div');
 				square.addEventListener('mouseover', e => {
 					e.target.style.background = 'black';
+					e.target.style.boxShadow = '.5rem .5rem 1rem grey';
 				});
 				sketchArea.appendChild(square);
 			}
@@ -129,6 +127,7 @@
 				const box = document.createElement('div');
 				box.addEventListener('mouseover', e => {
 					e.target.style.background = randomColor();
+					e.target.style.boxShadow = '.5rem .5rem 1rem grey';
 				});
 				sketchArea.appendChild(box);
 			}
