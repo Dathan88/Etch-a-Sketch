@@ -14,13 +14,13 @@
 	</style>
 </head>
 
-<body id="body" style='margin: 1rem; height: 90vh;'>
+<body style='margin: 1rem; height: 90vh;'>
 	<div id="container"></div>
 
 	<!--Javascript -->
 	<script type="text/javascript">
 		const container = document.getElementById('container');
-		const inputArea = document.createElement('span');
+		const inputArea = document.createElement('div');
 		const btn = document.createElement('button');
 		const customLabel = document.createElement('span');
 		const customInput = document.createElement('input');
@@ -29,11 +29,15 @@
 
 		//contains styles for above variables
 		function createStyles() {
-			container.appendChild(inputArea);
+			inputArea.setAttribute('id', 'inputArea')
+			inputArea.style.display = 'flex';
+			inputArea.style.margin = ' .6rem auto';
+			inputArea.style.width = '18.8rem';
+			inputArea.style.height = '1.5em';
 			//button to create custom board
 			btn.setAttribute('id', 'btn');
 			btn.innerHTML = 'Custom Colored Grid';
-			btn.style.position = 'absolute';
+			btn.style.position = 'relative';
 			btn.style.width = '10rem';
 			btn.style.left = 'calc(50% - 5rem)';
 			btn.addEventListener('click', () => {
@@ -42,7 +46,6 @@
 				customInput.style.display = 'block';
 				customBtn.style.display = 'block';
 			});
-			inputArea.appendChild(btn);
 			//input field - submits value to customBoard() on enter
 			customInput.setAttribute('id', 'customInput');
 			customInput.setAttribute('placeholder', 'Squares per side');
@@ -50,9 +53,10 @@
 			customInput.setAttribute('required', 'true');
 			customInput.setAttribute('min', '1');
 			customInput.setAttribute('max', '50');
-			customInput.style.position = 'absolute';
+			// customInput.style.position = 'absolute';
 			customInput.style.width = '9.7rem';
-			customInput.style.left = 'calc(50% - 5rem)';
+			customInput.style.margin = 'auto .5rem';
+			// customInput.style.left = 'calc(50% - 5rem)';
 			customInput.style.display = 'none';
 			customInput.addEventListener('keyup', (e) => {
 				e.preventDefault();
@@ -63,18 +67,18 @@
 					}
 				}
 			})
-			inputArea.appendChild(customInput)
 			//label left of input
-			customLabel.style.position = 'absolute';
-			customLabel.style.left = 'calc(50% - 9rem)';
-			customLabel.style.top = '1.15rem';
+			// customLabel.style.position = 'absolute';
+			customLabel.style.margin = 'auto 0';
+			// customLabel.style.left = 'calc(50% - 9rem)';
+			// customLabel.style.top = '1.15rem';
 			customLabel.innerHTML = 'MAX: 50'
 			customLabel.style.display = 'none';
-			inputArea.appendChild(customLabel)
 			//button to right of input - submits value to customBoard() on click
 			customBtn.setAttribute('type', 'submit');
-			customBtn.style.position = 'absolute';
-			customBtn.style.left = 'calc(60% - 5rem)';
+			// customBtn.style.position = 'absolute';
+			customBtn.style.margin = 'auto 0';
+			// customBtn.style.left = 'calc(60% - 5rem)';
 			customBtn.style.display = 'none';
 			customBtn.addEventListener('click', (e) => {
 				e.preventDefault();
@@ -83,21 +87,23 @@
 					customInput.value = '';
 				}
 			})
-			inputArea.appendChild(customBtn);
 			//Etch-a-Sketch area
 			sketchArea.style.display = 'grid';
 			sketchArea.style.position = 'relative';
-			sketchArea.style.top = '3rem';
+			// sketchArea.style.top = '3rem';
 			sketchArea.style.border = '1px solid black';
 			sketchArea.style.width = '37rem';
 			sketchArea.style.height = '37rem';
 			sketchArea.style.margin = 'auto';
 			sketchArea.style.gridTemplateColumns = `repeat(16, ${100/16}% )`;
 			sketchArea.style.gridTemplateRows = `repeat(16, ${100/16}% )`;
+			//Append elements to inputArea
+			container.appendChild(inputArea);
+			inputArea.appendChild(btn);
+			inputArea.appendChild(customLabel)
+			inputArea.appendChild(customInput)
+			inputArea.appendChild(customBtn);
 			container.appendChild(sketchArea);
-			//insert label and submit btn next to input area
-			// customInput.insertAdjacentElement('afterend', customLabel);
-			// customInput.insertAdjacentElement('afterend', customBtn);
 		}
 
 		//creates board - called from window.onload
