@@ -15,29 +15,34 @@
 </head>
 
 <body id="body" style='margin: 1rem; height: 90vh;'>
-	<button id="btn">Custom Colored Grid</button>
 	<div id="container"></div>
 
 	<!--Javascript -->
 	<script type="text/javascript">
 		const container = document.getElementById('container');
-		const btn = document.getElementById('btn');
+		const inputArea = document.createElement('span');
+		const btn = document.createElement('button');
+		const customLabel = document.createElement('span');
 		const customInput = document.createElement('input');
-		const inputLabel = document.createElement('span');
-		const subBtn = document.createElement('input');
+		const customBtn = document.createElement('input');
+		const sketchArea = document.createElement('div');
 
 		//contains styles for above variables
 		function createStyles() {
+			container.appendChild(inputArea);
 			//button to create custom board
+			btn.setAttribute('id', 'btn');
+			btn.innerHTML = 'Custom Colored Grid';
 			btn.style.position = 'absolute';
 			btn.style.width = '10rem';
 			btn.style.left = 'calc(50% - 5rem)';
 			btn.addEventListener('click', () => {
 				btn.style.display = 'none';
-				inputLabel.style.display = 'block';
+				customLabel.style.display = 'block';
 				customInput.style.display = 'block';
-				subBtn.style.display = 'block';
+				customBtn.style.display = 'block';
 			});
+			inputArea.appendChild(btn);
 			//input field - submits value to customBoard() on enter
 			customInput.setAttribute('id', 'customInput');
 			customInput.setAttribute('placeholder', 'Squares per side');
@@ -58,38 +63,41 @@
 					}
 				}
 			})
+			inputArea.appendChild(customInput)
 			//label left of input
-			inputLabel.style.position = 'absolute';
-			inputLabel.style.left = 'calc(50% - 9rem)';
-			inputLabel.style.top = '1.15rem';
-			inputLabel.innerHTML = 'MAX: 50'
-			inputLabel.style.display = 'none';
+			customLabel.style.position = 'absolute';
+			customLabel.style.left = 'calc(50% - 9rem)';
+			customLabel.style.top = '1.15rem';
+			customLabel.innerHTML = 'MAX: 50'
+			customLabel.style.display = 'none';
+			inputArea.appendChild(customLabel)
 			//button to right of input - submits value to customBoard() on click
-			subBtn.setAttribute('type', 'submit');
-			subBtn.style.position = 'absolute';
-			subBtn.style.left = 'calc(60% - 5rem)';
-			subBtn.style.display = 'none';
-			subBtn.addEventListener('click', (e) => {
+			customBtn.setAttribute('type', 'submit');
+			customBtn.style.position = 'absolute';
+			customBtn.style.left = 'calc(60% - 5rem)';
+			customBtn.style.display = 'none';
+			customBtn.addEventListener('click', (e) => {
 				e.preventDefault();
 				if (checkValid()) {
 					customBoard(customInput.value)
 					customInput.value = '';
 				}
 			})
-			document.body.prepend(customInput);
+			inputArea.appendChild(customBtn);
 			//Etch-a-Sketch area
-			container.style.display = 'grid';
-			container.style.position = 'relative';
-			container.style.top = '3rem';
-			container.style.border = '1px solid black';
-			container.style.width = '37rem';
-			container.style.height = '37rem';
-			container.style.margin = 'auto';
-			container.style.gridTemplateColumns = `repeat(16, ${100/16}% )`;
-			container.style.gridTemplateRows = `repeat(16, ${100/16}% )`;
+			sketchArea.style.display = 'grid';
+			sketchArea.style.position = 'relative';
+			sketchArea.style.top = '3rem';
+			sketchArea.style.border = '1px solid black';
+			sketchArea.style.width = '37rem';
+			sketchArea.style.height = '37rem';
+			sketchArea.style.margin = 'auto';
+			sketchArea.style.gridTemplateColumns = `repeat(16, ${100/16}% )`;
+			sketchArea.style.gridTemplateRows = `repeat(16, ${100/16}% )`;
+			container.appendChild(sketchArea);
 			//insert label and submit btn next to input area
-			customInput.insertAdjacentElement('afterend', inputLabel);
-			customInput.insertAdjacentElement('afterend', subBtn);
+			// customInput.insertAdjacentElement('afterend', customLabel);
+			// customInput.insertAdjacentElement('afterend', customBtn);
 		}
 
 		//creates board - called from window.onload
@@ -99,16 +107,16 @@
 				square.addEventListener('mouseover', e => {
 					e.target.style.background = 'black';
 				});
-				document.getElementById('container').appendChild(square);
+				sketchArea.appendChild(square);
 			}
 		}
 
 		//called on submit/enter press. Creates custom board w/ randomColor
 		function customBoard(sq) {
-			document.getElementById('container').innerHTML = '';
-			container.style.gridTemplateColumns = `repeat(${sq}, ${100 /
+			sketchArea.innerHTML = '';
+			sketchArea.style.gridTemplateColumns = `repeat(${sq}, ${100 /
 					sq}% )`;
-			container.style.gridTemplateRows = `repeat(${sq}, ${100 /
+			sketchArea.style.gridTemplateRows = `repeat(${sq}, ${100 /
 					sq}%  )`;
 
 			for (i = 0; i < sq * sq; i++) {
@@ -116,7 +124,7 @@
 				box.addEventListener('mouseover', e => {
 					e.target.style.background = randomColor();
 				});
-				container.appendChild(box);
+				sketchArea.appendChild(box);
 			}
 		}
 
