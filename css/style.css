@@ -1,0 +1,170 @@
+:root {
+	--shadow: 0.5rem 0.3rem 0.5rem black;
+}
+
+html {
+	min-width: 100vw;
+	font-size: 10px;
+}
+
+body {
+	background: gray;
+}
+
+#container {
+	margin: auto;
+	width: 65rem;
+	position: relative;
+}
+
+.inputArea {
+	display: inline-flex;
+	position: relative;
+	width: 64.4rem;
+	height: 7rem;
+	top: 49.7rem;
+	left: 0.3rem;
+	z-index: 1;
+}
+
+.inputArea:nth-of-type(2) {
+	display: none;
+	justify-content: center;
+}
+
+.button {
+	position: relative;
+	font-size: 1rem;
+	font-weight: bold;
+	letter-spacing: 0.8px;
+	background-image: linear-gradient(top, #f4f1ee, #fff);
+	box-shadow: 0px 8px 10px 0px rgba(0, 0, 0, 0.3), inset 0px 4px 1px 1px white,
+		inset 0px -3px 1px 1px rgba(204, 198, 197, 0.5);
+	border-radius: 50%;
+	height: 7rem;
+	width: 7rem;
+	border-style: none;
+	outline: none;
+	transition: all 0.1s linear;
+}
+
+#btn2 {
+	left: 50.3rem;
+}
+
+#inputWrap {
+	box-shadow: var(--shadow);
+	width: 12rem;
+	margin: auto 0.5rem;
+	display: none;
+}
+
+#customInput {
+	width: 12rem;
+}
+
+#customLabel {
+	margin: auto 0;
+	font-size: 1.5rem;
+	display: none;
+	text-shadow: 0.8rem 0.8rem 0.3rem black;
+}
+
+#customButton {
+	margin: auto 0;
+	display: none;
+	box-shadow: var(--shadow);
+}
+
+#sketchBody {
+	width: 65rem;
+	height: 50rem;
+	border-radius: 9%;
+	box-shadow: var(--shadow);
+	background: linear-gradient(
+		to right,
+		rgba(255, 0, 0, 1) 0%,
+		rgba(255, 140, 140, 1) 2%,
+		rgba(229, 19, 0, 1) 10%,
+		rgba(249, 0, 0, 1) 90%,
+		rgba(255, 140, 140, 1) 98%,
+		rgba(229, 19, 0, 1) 100%
+	);
+}
+
+#sketchArea {
+	display: grid;
+	position: relative;
+	top: 4.5rem;
+	background-color: gainsboro;
+	width: 50rem;
+	height: 39rem;
+	margin: auto;
+	box-shadow: dimgrey 0.5rem 0.5rem 0.5rem inset;
+	grid-template-rows: repeat(16, calc(100% / 16));
+	grid-template-columns: repeat(16, calc(100% / 16));
+}
+
+/* validation styling */
+#customInput:focus:invalid {
+	box-shadow: 0 0 10px 5px white;
+	outline-color: #ff0000;
+	outline-width: 3px;
+	outline-style: inset;
+}
+#customInput:focus:valid {
+	box-shadow: 0 0 10px 5px white;
+	outline-color: lime;
+	outline-width: 3px;
+	outline-style: inset;
+}
+
+/* button effects */
+.button:after {
+	color: #e9e6e4;
+	content: "";
+	display: block;
+	font-size: 30px;
+	height: 30px;
+	text-decoration: none;
+	text-shadow: 0px -1px 1px #bdb5b4, 1px 1px 1px white;
+	position: absolute;
+	width: 30px;
+}
+.button:hover {
+	background-image: -webkit-linear-gradient(top, #fff, #f4f1ee);
+	background-image: linear-gradient(top, #fff, #f4f1ee);
+	color: #0088cc;
+}
+.button:active {
+	background-image: -webkit-linear-gradient(top, #efedec, #f7f4f4);
+	background-image: linear-gradient(top, #efedec, #f7f4f4);
+	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.4), inset 0px -3px 1px 1px rgba(204, 198, 197, 0.5);
+}
+
+.button:active:after {
+	color: #dbd2d2;
+	text-shadow: 0px -1px 1px #bdb5b4, 0px 1px 1px white;
+}
+
+/* left button */
+#btn:after {
+	content: "✔";
+	left: 20px;
+	top: 16px;
+}
+#btn:hover:after {
+	color: #83d244;
+	text-shadow: 0px 0px 6px #83d244;
+}
+
+/* right button */
+#btn2:after {
+	content: "✖";
+	left: 20px;
+	top: 16px;
+}
+#btn2:hover:after {
+	color: #83d244;
+	text-shadow: 0px 0px 6px #83d244;
+}

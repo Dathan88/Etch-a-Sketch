@@ -1,305 +1,36 @@
 <!DOCTYPE html>
-<html style="min-width: 100vw; font-size: 10px;">
+<html>
 	<head>
+		<link rel="stylesheet" href="/css/style.css" />
 		<title>Etch-a-Sketch</title>
-		<style>
-			/* validation styling */
-			#customInput:focus:invalid {
-				box-shadow: 0 0 5px 1px #ff3333;
-			}
-			#customInput:valid {
-				box-shadow: 0 0 5px 1px lime;
-			}
-			/* button effects */
-			#btn:after {
-				color: #e9e6e4;
-				content: '';
-				display: block;
-				font-size: 30px;
-				height: 30px;
-				text-decoration: none;
-				text-shadow: 0px -1px 1px #bdb5b4, 1px 1px 1px white;
-				position: absolute;
-				width: 30px;
-			}
-			#btn:after {
-				content: '✔';
-				left: 20px;
-				top: 16px;
-			}
-			#btn:hover {
-				background-image: -webkit-linear-gradient(top, #fff, #f4f1ee);
-				background-image: linear-gradient(top, #fff, #f4f1ee);
-				color: #0088cc;
-			}
-			#btn:hover:after {
-				color: #83d244;
-				text-shadow: 0px 0px 6px #83d244;
-			}
-			#btn:active {
-				background-image: -webkit-linear-gradient(top, #efedec, #f7f4f4);
-				background-image: linear-gradient(top, #efedec, #f7f4f4);
-				box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.4),
-					inset 0px -3px 1px 1px rgba(204, 198, 197, 0.5);
-			}
-
-			#btn:active:after {
-				color: #dbd2d2;
-				text-shadow: 0px -1px 1px #bdb5b4, 0px 1px 1px white;
-			}
-			/* button 2 */
-			#btn2:after {
-				color: #e9e6e4;
-				content: '';
-				display: block;
-				font-size: 30px;
-				height: 30px;
-				text-decoration: none;
-				text-shadow: 0px -1px 1px #bdb5b4, 1px 1px 1px white;
-				position: absolute;
-				width: 30px;
-			}
-			#btn2:after {
-				content: '✖';
-				left: 20px;
-				top: 16px;
-			}
-			#btn2:hover {
-				background-image: -webkit-linear-gradient(top, #fff, #f4f1ee);
-				background-image: linear-gradient(top, #fff, #f4f1ee);
-				color: #0088cc;
-			}
-			#btn2:hover:after {
-				color: #83d244;
-				text-shadow: 0px 0px 6px #83d244;
-			}
-			#btn2:active {
-				background-image: -webkit-linear-gradient(top, #efedec, #f7f4f4);
-				background-image: linear-gradient(top, #efedec, #f7f4f4);
-				box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.4),
-					inset 0px -3px 1px 1px rgba(204, 198, 197, 0.5);
-			}
-
-			#btn2:active:after {
-				color: #dbd2d2;
-				text-shadow: 0px -1px 1px #bdb5b4, 0px 1px 1px white;
-			}
-		</style>
 	</head>
 
 	<body>
-		<div id="container"></div>
+		<div id="container">
+			<span class="inputArea">
+				<button id="btn" class="button"></button>
+				<button id="btn2" class="button"></button>
+			</span>
+			<span class="inputArea">
+				<label for="customInput" id="customLabel">MAX: 50</label>
+				<span id="inputWrap">
+					<input
+						id="customInput"
+						type="number"
+						name="customInput"
+						required="true"
+						min="1"
+						max="50"
+						placeholder="Squares per side"
+					/>
+				</span>
+				<input id="customButton" type="button" value="Submit" />
+			</span>
+			<div id="sketchBody">
+				<div id="sketchArea"></div>
+			</div>
+		</div>
 
-		<!--Javascript -->
-		<script type="text/javascript">
-			const myBody = document.getElementsByTagName('body');
-			const container = document.getElementById('container');
-			const inputArea = document.createElement('div');
-			const btn = document.createElement('button');
-			const btn2 = document.createElement('button');
-			const customLabel = document.createElement('span');
-			const customInput = document.createElement('input');
-			const customInputWrap = document.createElement('span');
-			const customBtn = document.createElement('input');
-			const sketchArea = document.createElement('div');
-			const sketchBody = document.createElement('div');
-			const leftKnob = document.createElement('div');
-			const rightKnob = document.createElement('div');
-
-			// contains styles for above variables
-			function createStyles() {
-				myBody[0].style.background = 'gray';
-				container.style.marginTop = '6%';
-				container.style.width = '65rem';
-				// container.style.height = '30rem';
-				container.style.margin = 'auto';
-				container.style.position = 'relative';
-
-				// Container for button/user input
-				inputArea.setAttribute('id', 'inputArea');
-				inputArea.style.display = 'inline-flex';
-				inputArea.style.position = 'relative';
-				inputArea.style.width = '64.4rem';
-				inputArea.style.top = '49.7rem';
-				inputArea.style.left = '.3rem';
-				inputArea.style.zIndex = '1';
-
-				// button to create custom board
-				btn.setAttribute('id', 'btn');
-				// btn.innerHTML = 'Custom Grid';
-				btn.style.position = 'relative';
-				btn.style.fontSize = '1rem';
-				btn.style.fontWeight = 'bold';
-				btn.style.letterSpacing = '.8px';
-				btn.style.backgroundImage = 'linear-gradient(top, #f4f1ee, #fff)';
-				btn.style.boxShadow =
-					'0px 8px 10px 0px rgba(0, 0, 0, .3), inset 0px 4px 1px 1px white, inset 0px -3px 1px 1px rgba(204,198,197,.5)';
-				btn.style.borderRadius = '50%';
-				btn.style.height = '7rem';
-				btn.style.width = '7rem';
-				btn.style.borderStyle = 'none';
-				btn.style.outline = 'none';
-				btn.style.transition = 'all .1s linear';
-				btn.addEventListener('click', () => {
-					btn.style.display = 'none';
-					customLabel.style.display = 'block';
-					customInputWrap.style.display = 'block';
-					customBtn.style.display = 'block';
-				});
-
-				// second button
-				btn2.setAttribute('id', 'btn2');
-				// btn2.innerHTML = 'Button 2';
-				btn2.style.position = 'relative';
-				btn2.style.fontSize = '1rem';
-				btn2.style.fontWeight = 'bold';
-				btn2.style.letterSpacing = '.8px';
-				btn2.style.backgroundImage = 'linear-gradient(top, #f4f1ee, #fff)';
-				btn2.style.boxShadow =
-					'0px 8px 10px 0px rgba(0, 0, 0, .3), inset 0px 4px 1px 1px white, inset 0px -3px 1px 1px rgba(204,198,197,.5)';
-				btn2.style.borderRadius = '50%';
-				btn2.style.height = '7rem';
-				btn2.style.width = '7rem';
-				btn2.style.borderStyle = 'none';
-				// btn2.style.border = '2px dashed darkgrey';
-				btn2.style.left = '50.3rem';
-				btn2.style.outline = 'none';
-				btn2.style.transition = 'all .1s linear';
-
-				// wrapper for input to allow default shadow and validation shadow
-				customInputWrap.style.boxShadow = '.5rem .5rem 1rem black';
-				customInputWrap.style.width = '9.7rem';
-				customInputWrap.style.margin = 'auto .5rem';
-				customInputWrap.style.display = 'none';
-
-				// input field - submits value to customBoard() on enter
-				customInput.setAttribute('id', 'customInput');
-				customInput.setAttribute('placeholder', 'Squares per side');
-				customInput.setAttribute('type', 'number');
-				customInput.setAttribute('required', 'true');
-				customInput.setAttribute('min', '1');
-				customInput.setAttribute('max', '50');
-				customInput.style.width = '9.7rem';
-				customInput.addEventListener('keyup', e => {
-					e.preventDefault();
-					if (e.keyCode === 13) {
-						if (checkValid()) {
-							customBoard(customInput.value);
-							customInput.value = '';
-						}
-					}
-				});
-
-				// label left of input
-				customLabel.style.margin = 'auto 0';
-				customLabel.style.fontSize = '1.5rem';
-				customLabel.innerHTML = 'MAX: 50';
-				customLabel.style.display = 'none';
-				customLabel.style.textShadow = '.8rem .8rem .3rem black';
-
-				// button to right of input - submits value to customBoard() on click
-				customBtn.setAttribute('type', 'submit');
-				customBtn.style.margin = 'auto 0';
-				customBtn.style.display = 'none';
-				customBtn.style.boxShadow = '.5rem .5rem 1rem black';
-				customBtn.addEventListener('click', e => {
-					e.preventDefault();
-					if (checkValid()) {
-						customBoard(customInput.value);
-						customInput.value = '';
-					}
-				});
-
-				// Etch-a-Sketch body
-				sketchBody.setAttribute('id', 'sketchBody');
-				// sketchBody.style.position = 'absolute';
-				sketchBody.style.width = '65rem';
-				sketchBody.style.height = '50rem';
-				sketchBody.style.borderRadius = '9%';
-				sketchBody.style.boxShadow = '.5rem .3rem .5rem black';
-				// sketchBody.style.left = 'calc(50% - 25rem)';
-				// sketchBody.style.margin = '2rem 0 0';
-				// sketchBody.style.backgroundColor = 'red';
-				sketchBody.style.background =
-					'linear-gradient(to right, rgba(255,0,0,1) 0%,rgba(255,140,140,1) 2%,rgba(229,19,0,1) 10%,rgba(249,0,0,1) 90%,rgba(255,140,140,1) 98%,rgba(229,19,0,1) 100%)';
-				// sketchBody.style.padding = '7rem';
-
-				// Etch-a-Sketch area
-				sketchArea.setAttribute('id', 'sketchArea');
-				sketchArea.style.display = 'grid';
-				sketchArea.style.position = 'relative';
-				sketchArea.style.top = '4.5rem';
-				// sketchArea.style.border = '7rem solid red';
-				sketchArea.style.backgroundColor = 'gainsboro';
-				sketchArea.style.width = '50rem';
-				sketchArea.style.height = '39rem';
-				sketchArea.style.margin = 'auto';
-				sketchArea.style.gridTemplateColumns = `repeat(16, ${100 / 16}% )`;
-				sketchArea.style.gridTemplateRows = `repeat(16, ${100 / 16}% )`;
-				sketchArea.style.boxShadow = 'dimgrey 0.5rem 0.5rem .5rem inset';
-
-				// Append elements to inputArea
-				container.appendChild(inputArea);
-				inputArea.appendChild(btn);
-				inputArea.appendChild(btn2);
-				inputArea.appendChild(customLabel);
-				inputArea.appendChild(customInputWrap);
-				customInputWrap.appendChild(customInput);
-				inputArea.appendChild(customBtn);
-				container.appendChild(sketchBody);
-				sketchBody.appendChild(sketchArea);
-			}
-
-			// creates board - called from window.onload
-			function createBoard() {
-				for (i = 0; i < 256; i++) {
-					const square = document.createElement('div');
-					square.addEventListener('mouseover', e => {
-						e.target.style.background = 'black';
-						// e.target.style.boxShadow = '.2rem .2rem .5rem black';
-					});
-					sketchArea.appendChild(square);
-				}
-			}
-
-			// called on submit/enter press. Creates custom board w/ randomColor
-			function customBoard(sq) {
-				sketchArea.innerHTML = '';
-				sketchArea.style.gridTemplateColumns = `repeat(${sq}, ${100 / sq}% )`;
-				sketchArea.style.gridTemplateRows = `repeat(${sq}, ${100 / sq}%  )`;
-
-				for (i = 0; i < sq * sq; i++) {
-					const box = document.createElement('div');
-					box.addEventListener('mouseover', e => {
-						e.target.style.background = randomColor();
-						e.target.style.boxShadow = '.5rem .5rem 1rem black';
-					});
-					sketchArea.appendChild(box);
-				}
-			}
-
-			// called with customBoard/ makes the change color on each pass over
-			function randomColor() {
-				const letters = '0120456789ABCDEF';
-				let color = '#';
-				for (i = 0; i < 6; i++) {
-					color += letters[Math.floor(Math.random() * 16)];
-				}
-				return color;
-			}
-
-			// check if input is > 0 and < 51
-			function checkValid() {
-				const rules = new RegExp('^([1-9]|[1-4][0-9]|(50))$');
-				return rules.test(customInput.value);
-			}
-
-			// create syles and board onload - styles first or code breaks
-			window.onload = function() {
-				createStyles();
-				createBoard();
-				customInput.oninput = checkValid;
-			};
-		</script>
+		<script src="/js/index.js"></script>
 	</body>
 </html>
